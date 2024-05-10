@@ -1,0 +1,39 @@
+compose:
+  start:
+    parts:
+      - 'texting:start_greeting'
+      - 'texting:details'
+      - 'texting:commands'
+      - 'texting:legal'
+  help:
+    parts:
+      - 'texting:help_greeting'
+      - 'texting:commands'
+      - 'texting:legal'
+  about:
+    parts:
+      - 'texting:details'
+      - 'texting:legal'
+  cat:
+    parts:
+      - 'texting:cat_title'
+      - 'texting:cat_caption'
+  error:
+    parts:
+      - 'exceptions:exceptions_title'
+      - 'exceptions:exceptions_body'
+  unknown_command:
+    parts:
+      - 'exceptions:unknown_command'
+texting:
+  start_greeting: "*Ніколи такого не було, і от знову, ти тут*\n\n"
+  help_greeting: "Шо забув? Зараз я тобі напам'ятаю\\.\n\n"
+  details: "Основна ціль цього чат\\-бота це пропозиції новин, ідей та зауважень для телеграм\\-каналу [Протіпівничка](https://t.me/protipivnichka)\n\n"
+  commands: "*Невеликий список доступний команд:*\n\n*/start* \\- логічно же,\n*/suggest* \\- запропонувати щось для публікації,\n*/complain* \\- поскаржитись або покритикувати,\n*/cat* \\- побачити фото киціка,\n*/about* \\- подивитись інформацію про бота,\n*/help* \\- показати це повідомлення знову,\n\n"
+  legal: "_Цей бот не є анонімним, але він не зберігає ні вашого імені, ні будь\\-якої іншої приватної інформації\\._"
+  cat_title: "*Ось тобі миленький котик*\n\n"
+  cat_caption: "Милуйся і можеш викликати ще одного, _але не зловживай там всього 10к реквестів на місяць_\\."
+exceptions:
+  exceptions_title: "*Я ніц не чіпав воно саме впало*\n\n"
+  exceptions_body: "Давай так, лог зберігся і я його потім гляну, а ти проігноруєш цю проблему\\."
+  unknown_command: "Такої команди не існує, запусти /help, щоб побачити весь список команд\\."
