@@ -4,8 +4,8 @@ const path = require('path');
 const yaml= require('js-yaml');
 const fs= require('fs');
 // Custom services.
-const logger = require('logger');
-const imagesManager = require('imagesManager');
+const logger = require('./logger');
+const imagesManager = require('./imagesManager');
 
 /**
  * Path to the texting config file.
