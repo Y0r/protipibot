@@ -1,0 +1,7 @@
+
+# Secured files.
+.env
+
+# Development files.
+/.idea
+/node_modules
