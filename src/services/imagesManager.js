@@ -1,6 +1,7 @@
 
 const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') })
+const appRoot = require('app-root-path')
+require('dotenv').config({ path: path.resolve(__dirname, `${appRoot}/.env`) })
 
 /**
  * URL of the Cat API endpoint.
