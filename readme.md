@@ -4,6 +4,18 @@
 1) Build container 'docker build -t bot .'
 2) Run 'docker compose up'
 
+### Mongo debug:
+
+1) Run 'docker compose exec mongo_db sh' to open container CLi.
+2) Run 'mongosh' to start session (?).
+
+Then you can use different commands:
+ - show collections
+ - show tables
+ - db.logs.find()
+
+_logs - table name to display._
+
 ## Texting
 
 Since telegram supports html or markdown modes we can use different approaches. 
@@ -30,3 +42,7 @@ Take a look on /config/logger.yml to specify logger configurations.
 
 Integrates third-party service Cat API and return random cat photo.
 API credentials stored in .env file.
+
+# Coding Standards
+
+Just install and configure prettier in JetBrains IDE. That's it.
