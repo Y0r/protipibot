@@ -1,4 +1,5 @@
 compose:
+  # Simple commands.
   start:
     parts:
       - 'texting:start_greeting'
@@ -18,6 +19,24 @@ compose:
     parts:
       - 'texting:cat_title'
       - 'texting:cat_caption'
+  # Advanced commands.
+  suggestion_init:
+    parts:
+      - 'texting:suggestion'
+      - 'texting:suggestion_anonymity'
+  suggestion_ending:
+    parts:
+      - 'texting:suggestion_gratitude'
+      - 'texting:suggestion_timing'
+  complaint_init:
+    parts:
+      - 'texting:complaint'
+      - 'texting:complaint_anonymity'
+  complaint_ending:
+    parts:
+      - 'texting:complaint_gratitude'
+      - 'texting:complaint_timing'
+  # Errors and exceptions.
   error:
     parts:
       - 'exceptions:exceptions_title'
@@ -33,6 +52,14 @@ texting:
   legal: "_Цей бот не є анонімним, але він не зберігає ні вашого імені, ні будь\\-якої іншої приватної інформації\\._"
   cat_title: "*Ось тобі миленький котик*\n\n"
   cat_caption: "Милуйся і можеш викликати ще одного, _але не зловживай там всього 10к реквестів на місяць_\\."
+  suggestion: "*Надішли свій протіп або ідею*, твоє повідомлення збережеться і ми його наближчим часом опрацюємо\n\n"
+  suggestion_anonymity: "_Залиш свій нікнейм, якщо бажаєш, щоб тебе було вказано як співавтора\\._"
+  suggestion_gratitude: "*Дякую за пропозицію, більше ідей \\= більше постів\\.*\n\n"
+  suggestion_timing: "Зазвичай найближчі 2 тижні розплановані, проте якщо новина дуже цікава і не вимагає додаткової роботи, то опублікувається ASAP\\."
+  complaint: "*Хочеш на щось пожалітись чи покритикувати\\? Можеш зробити це тут, просто напиши все що думаєш боту*\n\n"
+  complaint_anonymity: "_Краще не залишай імені чи нікнейму\\. Будь\\-яка скарга має бути анонімізована\\._"
+  complaint_gratitude: "*Поганий відгук — це теж відгук*\n\n"
+  complaint_timing: "_Постараємось відреагувати на твоє повідомлення якнайшвидше, але нічого не обіцяємо_\\."
 exceptions:
   exceptions_title: "*Я ніц не чіпав воно саме впало*\n\n"
   exceptions_body: "Давай так, лог зберігся і я його потім гляну, а ти проігноруєш цю проблему\\."
