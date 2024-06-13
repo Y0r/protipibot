@@ -1,18 +1,22 @@
-
 // Base includes.
-const path = require('path');
-const yaml= require('js-yaml');
-const fs= require('fs');
+const appRoot = require("app-root-path");
+const path = require("path");
+const yaml = require("js-yaml");
+const fs = require("fs");
+
 // Custom services.
-const logger = require('./logger');
-const imagesManager = require('./imagesManager');
+const logger = require("./logger");
+const imagesManager = require("./imagesManager");
 
 /**
  * Path to the texting config file.
  *
  * @type {string}
  */
-const TEXTING_CONFIG_PATH = path.resolve(__filename, '../../config/texting.yml');
+const TEXTING_CONFIG_PATH = path.resolve(
+  __filename,
+  `${appRoot}/config/texting.yml`,
+);
 
 /**
  * Reply message for /start command.
@@ -20,12 +24,12 @@ const TEXTING_CONFIG_PATH = path.resolve(__filename, '../../config/texting.yml')
  * @param context
  */
 function replyOnStart(context) {
-  logger.log('notice', context);
+  logger.log("notice", context);
 
   imagesManager.getCatPhotoUrl().then((images) => {
     const image = images.shift();
-    context.replyWithPhoto(image['url'], {
-      caption: composeText('start'),
+    context.replyWithPhoto(image["url"], {
+      caption: composeText("start"),
       ...getDefaultMessageParameters(),
     });
   });
@@ -38,8 +42,8 @@ function replyOnStart(context) {
  *   Context object.
  */
 function replyOnHelp(context) {
-  logger.log('notice', context);
-  context.reply(composeText('help'), getDefaultMessageParameters());
+  logger.log("notice", context);
+  context.reply(composeText("help"), getDefaultMessageParameters());
 }
 
 /**
@@ -49,8 +53,8 @@ function replyOnHelp(context) {
  *   Context object.
  */
 function replyOnAbout(context) {
-  logger.log('notice', context);
-  context.reply(composeText('about'), getDefaultMessageParameters());
+  logger.log("notice", context);
+  context.reply(composeText("about"), getDefaultMessageParameters());
 }
 
 /**
@@ -60,12 +64,12 @@ function replyOnAbout(context) {
  *   Context object.
  */
 function showCat(context) {
-  logger.log('notice', context);
+  logger.log("notice", context);
 
   imagesManager.getCatPhotoUrl().then((images) => {
     const image = images.shift();
-    context.replyWithPhoto(image['url'], {
-      caption: composeText('cat'),
+    context.replyWithPhoto(image["url"], {
+      caption: composeText("cat"),
       ...getDefaultMessageParameters(),
     });
   });
@@ -85,23 +89,23 @@ function showCat(context) {
  * @see /config/texting.yml.
  */
 function composeText(set_name) {
-  let composed = '';
+  let composed = "";
   // Load config with compose texting.
-  const config = yaml.load(fs.readFileSync(TEXTING_CONFIG_PATH, 'utf8'));
+  const config = yaml.load(fs.readFileSync(TEXTING_CONFIG_PATH, "utf8"));
 
   // Get current set of the testing.
   // Get texting parts from the current set.
-  const set_parts = config['compose'][set_name]['parts'];
+  const set_parts = config["compose"][set_name]["parts"];
 
   if (set_parts === undefined) {
-    throw new Error('Tried to process unknown/broken texting compose.');
+    throw new Error("Tried to process unknown/broken texting compose.");
   }
 
   // Go through set parts fetch them and combine into single line.
   for (const [key, value] of Object.entries(set_parts)) {
     // Get path to the value.
     // Example: texting -> start_greeting;
-    let keys = value.split(':');
+    let keys = value.split(":");
 
     /**
      * Return array value by keys.
@@ -111,7 +115,8 @@ function composeText(set_name) {
      * @param keys
      *   Array of keys to dig in.
      */
-    const deepGet = (object, keys) => keys.reduce((xs, x) => xs?.[x] ?? null, object);
+    const deepGet = (object, keys) =>
+      keys.reduce((xs, x) => xs?.[x] ?? null, object);
 
     /**
      * Returns nested array value.
@@ -122,19 +127,13 @@ function composeText(set_name) {
      *   Array of keys to dig in.
      */
     const deepGetByPaths = (object, ...paths) =>
-      paths.map(path =>
-        deepGet(
-          object,
-          path
-        )
-      );
+      paths.map((path) => deepGet(object, path));
 
     composed += deepGetByPaths(config, keys);
   }
 
   return composed;
 }
-
 
 /**
  * Return an object of properties.
@@ -143,8 +142,8 @@ function composeText(set_name) {
  */
 function getDefaultMessageParameters() {
   return {
-    'parse_mode': 'MarkdownV2',
-    'protect_content': true
+    parse_mode: "MarkdownV2",
+    protect_content: true,
   };
 }
 
