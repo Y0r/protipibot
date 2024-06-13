@@ -1,5 +1,6 @@
 services:
   bot:
+    container_name: bot_container
     build: .
     command: npm run build
     volumes:
@@ -7,3 +8,23 @@ services:
       - /opt/app/node_modules
     ports:
       - "3000:3000"
+    networks:
+      - bridge
+    depends_on:
+      - mongo_db
+
+  mongo_db:
+    container_name: database_container
+    image: mongo:latest
+    restart: always
+    networks:
+      - bridge
+    volumes:
+      - mongo_db:/data/db
+
+volumes:
+  mongo_db: {}
+
+networks:
+  bridge:
+    driver: bridge
