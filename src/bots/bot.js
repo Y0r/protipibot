@@ -8,6 +8,7 @@ require("dotenv").config({ path: path.resolve(__dirname, `${appRoot}/.env`) });
 // Additional includes.
 const base = require(`${appRoot}/src/messages/baseMessages`);
 const advanced = require(`${appRoot}/src/messages/advancedMessages`);
+const management = require(`${appRoot}/src/messages/managementMessages`);
 
 // Define bot using telegraf.
 const bot = new Telegraf(process.env.BOT_TOKEN);
@@ -49,6 +50,7 @@ bot.command("cat", (context) => base.showCat(context));
 const stage = new Scenes.Stage([
   advanced.handleSuggestion(),
   advanced.handleComplaint(),
+  management.manageEntities(),
 ]);
 
 // Enable sessions and stage middleware.
@@ -71,6 +73,18 @@ bot.command("suggest", (context) => {
  */
 bot.command("complain", (context) => {
   context.scene.enter(advanced.COMPLAINT_SCENE).then();
+});
+
+/**
+ * The custom command to manage entities.
+ *
+ * This command allows to view and manage:
+ * - Suggestions
+ * - Complaints
+ * - Logs
+ */
+bot.command("data", (context) => {
+  context.scene.enter(management.MANAGE_ENTITIES_SCENE).then();
 });
 
 /**

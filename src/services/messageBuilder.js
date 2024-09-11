@@ -28,6 +28,42 @@ const TEXTING_CONFIG_PATH = path.resolve(
  * @see /config/texting.yml.
  */
 function composeText(set_name) {
+  // Load config with compose texting.
+  const config = yaml.load(fs.readFileSync(TEXTING_CONFIG_PATH, "utf8"), {});
+
+  // Get current set of the testing.
+  // Get texting parts from the current set.
+  const type = config["compose"][set_name]["type"];
+
+  switch (type) {
+    case "default":
+      return composeDefault(set_name);
+
+    case "random":
+      return composeRandom(set_name);
+
+    case "image":
+      return composeMedia(set_name);
+
+    default:
+      throw new Error("Texting set type is not defined.");
+  }
+}
+
+/**
+ * Get text for message by set name.
+ *
+ * Using config file the message text will be composed using texting parts.
+ *
+ * @param set_name
+ *   Set name of the message.
+ *
+ * @returns {string}
+ *   Message text.
+ *
+ * @see /config/texting.yml.
+ */
+function composeDefault(set_name) {
   let composed = "";
   // Load config with compose texting.
   const config = yaml.load(fs.readFileSync(TEXTING_CONFIG_PATH, "utf8"));
@@ -72,6 +108,40 @@ function composeText(set_name) {
   }
 
   return composed;
+}
+
+/**
+ * Get text for message by set name.
+ *
+ * Using config file the message text will be randomly fetched from parts.
+ *
+ * @param set_name
+ *   Set name of the message.
+ *
+ * @returns {string}
+ *   Message text.
+ *
+ * @see /config/texting.yml.
+ */
+function composeRandom(set_name) {
+  // @todo complete this function.
+}
+
+/**
+ * Get text and media for message by set name.
+ *
+ * Using config file the message media and caption will be fetched.
+ *
+ * @param set_name
+ *   Set name of the message.
+ *
+ * @returns {string}
+ *   Message text.
+ *
+ * @see /config/texting.yml.
+ */
+function composeMedia(set_name) {
+  // @todo complete this function.
 }
 
 /**
