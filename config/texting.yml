@@ -1,49 +1,79 @@
 compose:
   # Simple commands.
   start:
+    type: 'default'
     parts:
       - 'texting:start_greeting'
       - 'texting:details'
       - 'texting:commands'
       - 'texting:legal'
   help:
+    type: 'default'
     parts:
       - 'texting:help_greeting'
       - 'texting:commands'
       - 'texting:legal'
   about:
+    type: 'default'
     parts:
       - 'texting:details'
       - 'texting:legal'
   cat:
+    type: 'default'
     parts:
       - 'texting:cat_title'
       - 'texting:cat_caption'
   # Advanced commands.
   suggestion_init:
+    type: 'default'
     parts:
       - 'texting:suggestion'
       - 'texting:suggestion_anonymity'
   suggestion_ending:
+    type: 'default'
     parts:
       - 'texting:suggestion_gratitude'
       - 'texting:suggestion_timing'
   complaint_init:
+    type: 'default'
     parts:
       - 'texting:complaint'
       - 'texting:complaint_anonymity'
   complaint_ending:
+    type: 'default'
     parts:
       - 'texting:complaint_gratitude'
       - 'texting:complaint_timing'
+  # Management commands.
+  management_start:
+    type: 'default'
+    parts:
+      - 'management_texting:start'
+      - 'management_texting:workflow'
+  management_empty_input:
+    type: 'default'
+    parts:
+      - 'management_texting:empty_input'
+      - 'management_texting:workflow'
+  management_end:
+    # @todo implement random type of texting.
+    type: 'image'
+    caption:
+      - 'management_texting:end'
+    Image:
+      - 'management_texting:end_image'
   # Errors and exceptions.
   error:
+    type: 'default'
     parts:
       - 'exceptions:exceptions_title'
       - 'exceptions:exceptions_body'
   unknown_command:
+    # @todo implement random type of texting.
+    type: 'random'
     parts:
-      - 'exceptions:unknown_command'
+      - 'exceptions:unknown_command_help'
+      - 'exceptions:unknown_command_oops'
 texting:
   start_greeting: "*Ніколи такого не було, і от знову, ти тут*\n\n"
   help_greeting: "Шо забув? Зараз я тобі напам'ятаю\\.\n\n"
@@ -60,7 +90,14 @@ texting:
   complaint_anonymity: "_Краще не залишай імені чи нікнейму\\. Будь\\-яка скарга має бути анонімізована\\._"
   complaint_gratitude: "*Поганий відгук — це теж відгук*\n\n"
   complaint_timing: "_Постараємось відреагувати на твоє повідомлення якнайшвидше, але нічого не обіцяємо_\\."
+management_texting:
+  start: "*Тицьни опцію, щоб обрати тип сутності, що хочеш переглянути*\n\n"
+  empty_input: "*Щось пішло не так, спробуй знову*\n\n"
+  workflow: "Детальної інструкції не буде, стежте за доступними кнопками, не клікайте дурниць та й на цьому все\\."
+  end: "Until we meet again!"
+  end_image: "https://i-enlisted.cdn.gaijin.net/original/3X/8/c/8cc32ae506088e67c752a5bc8f132db6229d2980.jpeg"
 exceptions:
   exceptions_title: "*Я ніц не чіпав воно саме впало*\n\n"
   exceptions_body: "Давай так, лог зберігся і я його потім гляну, а ти проігноруєш цю проблему\\."
-  unknown_command: "Такої команди не існує, запусти /help, щоб побачити весь список команд\\."
+  unknown_command_help: "Такої команди не існує, запусти /help, щоб побачити весь список команд\\."
+  unknown_command_oops: "Я щось нажала, і всьо пропало\\. Такої команди не існує, спробуй /help, щоб побачити усі опції\\."
