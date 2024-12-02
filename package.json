@@ -10,7 +10,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Y0r/protipstorage.git"
+  },
+  "author": "Y0r (Yurii Panchuk)",
   "license": "ISC",
   "dependencies": {
     "@types/node": "^20.12.8",

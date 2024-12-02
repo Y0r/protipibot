@@ -1,3 +1,7 @@
+Telegram Bot instance for chanel. 
+
+* Developed using telegraf.js library to handle Telegram API.
+* Built on docker to keep setup clear and scalable.
 
 # Installation
 
